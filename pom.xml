@@ -55,6 +55,17 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
+        <testResources>
+            <testResource>
+                <directory>${pom.basedir}/src/test/resources</directory>
+                <targetPath>./</targetPath>
+            </testResource>
+            <testResource>
+                <directory>${pom.basedir}/db</directory>
+                <targetPath>db</targetPath>
+            </testResource>
+        </testResources>
     </build>
 
 </project>
