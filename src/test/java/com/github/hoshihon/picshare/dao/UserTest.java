@@ -36,8 +36,6 @@ public class UserTest {
         User user = new User(1, "user1", "12345", "1111",
                 "imglink1", new Date(), "male", new Date(), null);
 
-        User.class.getConstructor()
-
         userMapper.register(user);
         Assert.assertNotNull(user.getId());
     }
