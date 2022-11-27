@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.hoshihon.picshare.dao.mybatis.ArtMapper">
+    <resultMap id="_ArtQuery" type="com.github.hoshihon.picshare.model.Art">
+        <id column="id" property="id"/>
+        <result column="art_title" property="title"/>
+        <result column="img_link" property="imgLink"/>
+        <result column="art_tag" property="tag"/>
+        <result column="like_count" property="likeCount"/>
+        <result column="star_count" property="starCount"/>
+        <result column="upload_date" property="uploadTime"/>
+        <result column="description" property="description"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.github.hoshihon.picshare.model.Art" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO picshare_art(`art_title`, `img_link`, `art_tag`, `like_count`, `star_count`, `upload_date`,`description`,`user_id` )
+            VALUES (#{title}, #{imgLink}, #{tag}, #{likeCount}, #{starCount}, #{uploadTime}, #{description}, #{userId})
+    </insert>
+
+    <delete id="delete" parameterType="com.github.hoshihon.picshare.model.User" >
+        DELETE
+        FROM picshare_art
+        WHERE `id` = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.github.hoshihon.picshare.model.Art">
+        UPDATE picshare_art
+        <set>
+            <if test="title != null and !title.isEmpty()">
+                `art_title` = #{title},
+            </if>
+            <if test="imgLink != null and !imgLink.isEmpty()">
+                `img_link` = #{imgLink},
+            </if>
+            <if test="tag != null and !tag.isEmpty()">
+                `art_tag` = #{tag},
+            </if>
+            <if test="uploadTime != null">
+                `upload_date` = #{uploadTime},
+            </if>
+            <if test="description != null and !description.isEmpty()">
+                `description` = #{description}
+            </if>
+        </set>
+        <where>
+            <choose>
+                <when test="id != null">id = #{id}</when>
+            </choose>
+        </where>
+    </update>
+
+    <select id="artQuery" parameterType="com.github.hoshihon.picshare.model.Art" resultMap="_ArtQuery">
+        SELECT
+        pa. id                as id,
+        pa. art_title         as art_title,
+        pa. img_link          as img_link,
+        pa. art_tag           as art_tag,
+        pa. like_count        as like_count,
+        pa. star_count        as star_count,
+        pa. upload_date       as upload_date,
+        pa. description       as description,
+        pa. user_id           as user_id,
+
+        FROM
+        picshare_art pa
+    </select>
+
+    <select id="findById" resultMap="_ArtQuery">
+        SELECT
+        pa. id                as id,
+        pa. art_title         as art_title,
+        pa. img_link          as img_link,
+        pa. art_tag           as art_tag,
+        pa. like_count        as like_count,
+        pa. star_count        as star_count,
+        pa. upload_date       as upload_date,
+        pa. description       as description,
+        pa. user_id           as user_id,
+
+        FROM
+        picshare_art pa
+        <where>
+            <if test="title != null and !title.isEmpty()">
+                `art_title` = #{title},
+            </if>
+        </where>
+    </select>
+
+</mapper>

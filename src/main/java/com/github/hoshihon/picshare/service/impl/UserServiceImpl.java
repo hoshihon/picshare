@@ -20,11 +20,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean register(UserProperties userProperties) {
+        String username = userProperties.getUsername();
+        User registUser = userDAO.findUser(username);
+        if (registUser != null) {
+            return false;
+        }
+        userDAO.insert(userProperties);
+        return true;
     }
 
 
     @Override
     public boolean login(UserProperties user) {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        User loginUser = userDAO.findUser(username);
+        if (loginUser == null) {
+            return false;
+        } else {
+            return loginUser.getPassword().equals(password);
+        }
     }
 
     @Override
