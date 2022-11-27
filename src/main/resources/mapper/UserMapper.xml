@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.hoshihon.picshare.dao.mybatis.UserMapper">
+    <resultMap id="_UserQuery" type="com.github.hoshihon.picshare.model.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickname"/>
+        <result column="icon" property="icon"/>
+        <result column="birth" property="birth"/>
+        <result column="sex" property="sex"/>
+        <result column="register_date" property="registerDate"/>
+        <result column="login_date" property="loginDate"/>
+    </resultMap>
+
+    <resultMap id="_UserProfile" type="com.github.hoshihon.picshare.model.Profile">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickname"/>
+        <result column="icon" property="icon"/>
+        <result column="birth" property="birth"/>
+        <result column="sex" property="sex"/>
+        <result column="register_date" property="registerDate"/>
+        <result column="login_date" property="loginDate"/>
+        <association property="art"
+                     columnPrefix="model_"
+                     javaType="com.github.hoshihon.picshare.model.Art">
+            <id column="id" property="id" />
+            <result column="art_title" property="title"/>
+            <result column="img_link" property="imgLink"/>
+        </association>
+    </resultMap>
+
+
+    <insert id="register" parameterType="com.github.hoshihon.picshare.model.User" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO `picshare_user` (`username`, `password`, `icon`, `birth`, `sex`, `register_date`,`login_date`)
+            VALUES (#{username}, #{password}, #{icon}, #{birth}, #{sex}, #{registerDate}, #{loginDate} )
+    </insert>
+
+    <select id="userProfile" parameterType="com.github.hoshihon.picshare.model.Profile" resultMap="_UserProfile">
+        SELECT
+        pu. id                  as id,
+        pu. username            as username,
+        pu. password            as password,
+        pu. nickname            as nickname,
+        pu. icon                as icon,
+        pu. birth               as birth,
+        pu. sex                 as sex,
+        pu. register_date       as register_date,
+        pu. login_date          as login_date,
+        pa. id                  as id,
+        pa. art_title           as title,
+        pa. img_link            as img_link
+
+        FROM
+        picshare_user pu,
+        picshare_art  pa
+        <where>
+        pu. id = #{id}
+        AND
+        pa.user_id = pu.id
+        </where>
+
+    </select>
+
+    <select id="findById" resultMap="_UserQuery">
+        SELECT
+        pu. id                  as id,
+        pu. username            as username,
+        pu. password            as password,
+        pu. nickname            as nickname,
+        pu. icon                as icon,
+        pu. birth               as birth,
+        pu. sex                 as sex,
+        pu. register_date       as register_date,
+        pu. login_date          as login_date,
+
+        FROM
+        picshare_user pu
+        <where>
+        <if test="id != null and !id.isEmpty()">
+            `id` = #{id},
+        </if>
+        </where>
+    </select>
+
+    <delete id="delete">
+        DELETE
+        FROM picshare_user
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.github.hoshihon.picshare.model.User">
+        UPDATE picshare_user
+        <set>
+            <if test="password != null and !password.isEmpty()">
+                `password` = #{password},
+            </if>
+            <if test="nickname != null and !nickname.isEmpty()">
+                `nickname` = #{nickname},
+            </if>
+            <if test="icon != null and !icon.isEmpty()">
+                `icon` = #{icon},
+            </if>
+            <if test="birth != null">
+                `birth` = #{birth},
+            </if>
+            <if test="sex != null and !sex.isEmpty()">
+                `sex` = #{sex},
+            </if>
+            <if test="registerDate != null">
+                `register_date` = #{registerDate},
+            </if>
+            <if test="loginDate != null">
+                `login_date` = #{loginDate},
+            </if>
+
+        </set>
+        <where>
+            <choose>
+                <when test="id != null">id = #{id}</when>
+            </choose>
+        </where>
+    </update>
+
+    <select id="findUser" resultMap="_UserQuery">
+        SELECT
+        pu. username       as username,
+        pu. password       as password
+        FROM
+        picshare_user pu
+        WHERE
+        `username` = #{username}
+
+    </select>
+
+
+
+
+</mapper>
