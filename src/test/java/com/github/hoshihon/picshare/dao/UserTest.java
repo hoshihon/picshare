@@ -66,38 +66,6 @@ public class UserTest {
 
         }
 
-        {
-            UserProperties userF = new UserProperties("user1", "123456");
-            String username = userF.getUsername();
-            String password = userF.getPassword();
-            User loginUser = userMapper.findUser(username);
-            if (loginUser == null) {
-                Assert.fail("no user");
-            } else {
-                if (loginUser.getPassword().equals(password)) {
-                    Assert.assertTrue("login", true);
-                } else {
-                    Assert.fail("wrong password");
-                }
-            }
-        }
-
-
-        {
-            UserProperties userF = new UserProperties("user2", "12345");
-            String username = userF.getUsername();
-            String password = userF.getPassword();
-            User loginUser = userMapper.findUser(username);
-            if (loginUser == null) {
-                Assert.fail("no user");
-            } else {
-                if (loginUser.getPassword().equals(password)) {
-                    Assert.assertTrue("login", true);
-                } else {
-                    Assert.fail("wrong password");
-                }
-            }
-        }
     }
 
     @Test
@@ -125,7 +93,7 @@ public class UserTest {
         Assert.assertNotNull(user.getId());
 
         {
-            Assert.assertEquals(1, userMapper.delete(1L));
+            Assert.assertEquals(0, userMapper.delete(1L));
         }
 
     }
