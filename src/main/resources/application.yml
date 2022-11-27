@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    profiles: local
+    url: jdbc:mysql://localhost/picshare?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: yyy
+    password: 111
+
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
