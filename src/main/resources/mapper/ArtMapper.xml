@@ -51,7 +51,7 @@
         </where>
     </update>
 
-    <select id="artQuery" parameterType="com.github.hoshihon.picshare.model.Art" resultMap="_ArtQuery">
+    <select id="artQuery" parameterType="com.github.hoshihon.picshare.dto.ArtProperties" resultMap="_ArtQuery">
         SELECT
         pa. id                as id,
         pa. art_title         as art_title,
@@ -61,8 +61,7 @@
         pa. star_count        as star_count,
         pa. upload_date       as upload_date,
         pa. description       as description,
-        pa. user_id           as user_id,
-
+        pa. user_id           as user_id
         FROM
         picshare_art pa
     </select>
@@ -81,11 +80,9 @@
 
         FROM
         picshare_art pa
-        <where>
-            <if test="title != null and !title.isEmpty()">
-                `art_title` = #{title},
-            </if>
-        </where>
+        WHERE
+        `id` = #{id}
+
     </select>
 
 </mapper>

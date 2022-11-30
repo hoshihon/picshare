@@ -2,14 +2,17 @@ package com.github.hoshihon.picshare.service;
 
 import com.github.hoshihon.picshare.VO.ArtVO;
 import com.github.hoshihon.picshare.dto.ArtProperties;
+import com.github.hoshihon.picshare.model.Art;
+
+import java.util.List;
 
 
 public interface ArtService {
-    ArtVO queryArt();
+    List<ArtProperties> queryArt();
 
-    ArtVO addArt(ArtProperties artProperties);
+    boolean addArt(Art art);
 
-    ArtVO deleteArt(ArtProperties artProperties);
+    boolean deleteArt(long id);
 
     ArtVO searchArt(int id);
 
