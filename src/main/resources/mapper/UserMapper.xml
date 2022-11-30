@@ -13,7 +13,7 @@
         <result column="login_date" property="loginDate"/>
     </resultMap>
 
-    <resultMap id="_UserProfile" type="com.github.hoshihon.picshare.model.Profile">
+    <resultMap id="_UserProfile" type="com.github.hoshihon.picshare.dto.UserProfile">
         <id column="id" property="id"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
@@ -24,7 +24,6 @@
         <result column="register_date" property="registerDate"/>
         <result column="login_date" property="loginDate"/>
         <association property="art"
-                     columnPrefix="model_"
                      javaType="com.github.hoshihon.picshare.model.Art">
             <id column="id" property="id" />
             <result column="art_title" property="title"/>
@@ -35,8 +34,8 @@
 
     <insert id="register" parameterType="com.github.hoshihon.picshare.model.User" useGeneratedKeys="true"
             keyProperty="id">
-        INSERT INTO `picshare_user` (`username`, `password`, `icon`, `birth`, `sex`, `register_date`,`login_date`)
-            VALUES (#{username}, #{password}, #{icon}, #{birth}, #{sex}, #{registerDate}, #{loginDate} )
+        INSERT INTO `picshare_user` (`username`, `password`,`nickname`, `icon`, `birth`, `sex`, `register_date`,`login_date`)
+            VALUES (#{username}, #{password},#{nickname}, #{icon}, #{birth}, #{sex}, #{registerDate}, #{loginDate} )
     </insert>
 
     <select id="userProfile" parameterType="com.github.hoshihon.picshare.model.Profile" resultMap="_UserProfile">
@@ -50,7 +49,7 @@
         pu. sex                 as sex,
         pu. register_date       as register_date,
         pu. login_date          as login_date,
-        pa. id                  as id,
+        pa. id                  as artId,
         pa. art_title           as title,
         pa. img_link            as img_link
 

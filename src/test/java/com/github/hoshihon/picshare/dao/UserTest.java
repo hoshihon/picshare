@@ -111,9 +111,10 @@ public class UserTest {
         artMapper.insert(art1);
 
         {
-            List<UserProfile> result = userMapper.userProfile(1L);
-//            Assert.assertEquals(1,result.size());
-            Assert.assertNotNull(result);
+            List<UserProfile> result = userMapper.userProfile(1);
+            System.out.println(result.get(0).getTitle());
+            Assert.assertEquals(1,result.size());
+//            Assert.assertNotNull(result);
         }
     }
 
