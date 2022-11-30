@@ -9,6 +9,8 @@ public class UserProperties {
 
     private String password;
 
+    private String nickname;
+
     private String icon;
 
     private Date birth;
@@ -20,10 +22,11 @@ public class UserProperties {
 
     private Date loginDate;
 
-    public UserProperties(long id, String username, String password, String icon, Date birth, String sex, Date registerDate, Date loginDate) {
+    public UserProperties(long id, String username, String password, String nickname, String icon, Date birth, String sex, Date registerDate, Date loginDate) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.nickname = nickname;
         this.icon = icon;
         this.birth = birth;
         this.sex = sex;
@@ -101,6 +104,14 @@ public class UserProperties {
 
     public void setLoginDate(Date loginDate) {
         this.loginDate = loginDate;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     @Override

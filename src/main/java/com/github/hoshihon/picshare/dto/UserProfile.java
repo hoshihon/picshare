@@ -1,114 +1,37 @@
 package com.github.hoshihon.picshare.dto;
 
+import com.github.hoshihon.picshare.model.Art;
+import com.github.hoshihon.picshare.model.User;
+
 import java.util.Date;
 
-public class UserProfile {
-    private long id;
+public class UserProfile extends UserProperties{
 
-    private String username;
-
-    private String password;
-
-    private String nickname;
-
-    private String icon;
-
-    private Date birth;
-
-    private String sex;
-
-    private Date registerDate;
-
-    private Date loginDate;
-
-
+    private long artId;
     private String title;
-
     private String imgLink;
+    private Art art;
 
-    public UserProfile(String username, String password, String nickname, String icon, Date birth, String sex, Date registerDate, Date loginDate, String title, String imgLink) {
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
-        this.icon = icon;
-        this.birth = birth;
-        this.sex = sex;
-        this.registerDate = registerDate;
-        this.loginDate = loginDate;
-        this.title = title;
+    public UserProfile(long id, String username, String password, String nickname, String icon, Date birth, String sex, Date registerDate, Date loginDate) {
+        super(id, username, password, nickname, icon, birth, sex, registerDate, loginDate);
+    }
+
+    public UserProfile(long id, String username, String password, String nickname, String icon, Date birth, String sex, Date registerDate, Date loginDate, long artId, String title, String imgLink) {
+        super(id, username, password, nickname, icon, birth, sex, registerDate, loginDate);
+        this.artId = artId;
+        this.title = art.getTitle();
         this.imgLink = imgLink;
     }
 
-    public long getId() {
-        return id;
+    public UserProfile() {
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public long getArtId() {
+        return artId;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public Date getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public Date getRegisterDate() {
-        return registerDate;
-    }
-
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public Date getLoginDate() {
-        return loginDate;
-    }
-
-    public void setLoginDate(Date loginDate) {
-        this.loginDate = loginDate;
+    public void setArtId(long artId) {
+        this.artId = artId;
     }
 
     public String getTitle() {
@@ -125,5 +48,13 @@ public class UserProfile {
 
     public void setImgLink(String imgLink) {
         this.imgLink = imgLink;
+    }
+
+    public Art getArt() {
+        return art;
+    }
+
+    public void setArt(Art art) {
+        this.art = art;
     }
 }
