@@ -16,9 +16,8 @@ public interface UserService {
     boolean login(UserProperties userProperties);
 
 
-    List<UserVO> queryUser(int id);
 
-    UserVO editUser(UserProperties userProperties);
+    UserProfile userProfile(long id);
 
 
     UserVO searchUser(int id);

@@ -42,8 +42,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ApiResult queryUser(@PathVariable("id") int id) {
-        return null;
+    public ApiResult<UserProfile> userprofile(@PathVariable("id") long id) {
+        UserProfile userProfile = userService.userProfile(id);
+        return ApiResult.success(userProfile);
     }
 
     @PostMapping("/{id}/edit")

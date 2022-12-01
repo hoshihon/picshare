@@ -48,13 +48,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserVO> queryUser(int id) {
-        return null;
-    }
+    public UserProfile userProfile(long id) {
+        UserProfile userProfiles = userDAO.userProfile(id);
+        return userProfiles;
 
-    @Override
-    public UserVO editUser(UserProperties userProperties) {
-        return null;
     }
 
     @Override
