@@ -23,12 +23,19 @@
         <result column="sex" property="sex"/>
         <result column="register_date" property="registerDate"/>
         <result column="login_date" property="loginDate"/>
-        <association property="art"
-                     javaType="com.github.hoshihon.picshare.model.Art">
-            <id column="id" property="id" />
-            <result column="art_title" property="title"/>
+        <collection property="userArt"
+                    javaType="java.util.List"
+                    ofType="com.github.hoshihon.picshare.dto.ArtProperties">
+            <id column="art_id" property="id" />
+            <result column="title" property="title"/>
             <result column="img_link" property="imgLink"/>
-        </association>
+            <result column="art_tag" property="tag"/>
+            <result column="like_count" property="likeCount"/>
+            <result column="star_count" property="starCount"/>
+            <result column="upload_date" property="uploadTime"/>
+            <result column="description" property="description"/>
+            <result column="user_id" property="userId"/>
+        </collection>
     </resultMap>
 
 
@@ -51,16 +58,21 @@
         pu. login_date          as login_date,
         pa. id                  as artId,
         pa. art_title           as title,
-        pa. img_link            as img_link
-
+        pa. img_link            as img_link,
+        pa. art_tag             as art_tag,
+        pa. like_count          as like_count,
+        pa. star_count          as star_count,
+        pa. upload_date         as upload_date,
+        pa. description         as description,
+        pa. user_id             as user_id
         FROM
-        picshare_user pu,
+        picshare_user pu
+        INNER JOIN
         picshare_art  pa
-        <where>
+        ON
         pu. id = #{id}
         AND
-        pa.user_id = pu.id
-        </where>
+        pu.id = pa.user_id
 
     </select>
 
