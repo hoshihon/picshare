@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserDAO extends BaseDAO {
 
-    List<UserProfile> userProfile(long id);
+    UserProfile userProfile(long id);
 
     void register(User user);
 
