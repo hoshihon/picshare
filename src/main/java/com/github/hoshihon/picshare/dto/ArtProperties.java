@@ -21,6 +21,9 @@ public class ArtProperties {
 
     private long userId;
 
+    public ArtProperties() {
+    }
+
     public ArtProperties(long id, String title, String imgLink, String tag, int likeCount, int starCount, Date uploadTime, String description, long userId) {
         this.id = id;
         this.title = title;
