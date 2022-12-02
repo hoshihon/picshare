@@ -77,10 +77,7 @@ public class UserController {
             imgDir.mkdir();
         }
 
-        FileChannel channel = FileChannel.open("");
-
-        channel.transferTo()
-
+     
         UserProperties user = userService.findById(id);
 
         if (!file.isEmpty()) {
