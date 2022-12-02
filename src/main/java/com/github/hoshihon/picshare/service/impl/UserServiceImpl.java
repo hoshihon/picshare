@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -51,17 +50,32 @@ public class UserServiceImpl implements UserService {
     public UserProfile userProfile(long id) {
         UserProfile userProfiles = userDAO.userProfile(id);
         return userProfiles;
+    }
+
+    @Override
+    public int updateUser(UserProperties userProperties) {
+        User user = userProperties.toUser(userProperties);
+        int update = userDAO.update(user);
+        return update;
+
 
     }
 
     @Override
-    public UserVO searchUser(int id) {
+    public UserProperties findById(long id) {
+        UserProperties user = (UserProperties) userDAO.findById(id);
+        return user;
+    }
+
+    @Override
+    public UserProperties searchUser(int id) {
         return null;
     }
 
     @Override
-    public UserVO deleteUser(int id) {
-        return null;
+    public int deleteUser(int id) {
+        int delete = userDAO.delete(id);
+        return delete;
     }
 
     @Override

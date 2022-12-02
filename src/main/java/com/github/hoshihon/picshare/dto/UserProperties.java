@@ -1,5 +1,7 @@
 package com.github.hoshihon.picshare.dto;
 
+import com.github.hoshihon.picshare.model.User;
+
 import java.util.Date;
 
 public class UserProperties {
@@ -24,6 +26,17 @@ public class UserProperties {
 
     public UserProperties(long id, String username, String password, String nickname, String icon, Date birth, String sex, Date registerDate, Date loginDate) {
         this.id = id;
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.icon = icon;
+        this.birth = birth;
+        this.sex = sex;
+        this.registerDate = registerDate;
+        this.loginDate = loginDate;
+    }
+
+    public UserProperties(String username, String password, String nickname, String icon, Date birth, String sex, Date registerDate, Date loginDate) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
@@ -112,6 +125,21 @@ public class UserProperties {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public static User toUser(UserProperties properties) {
+        if (properties == null) return null;
+
+        return new User(properties.getId(),
+                properties.getUsername(),
+                properties.getPassword(),
+                properties.getNickname(),
+                properties.getIcon(),
+                properties.getBirth(),
+                properties.getSex(),
+                properties.getRegisterDate(),
+                properties.getLoginDate());
+
     }
 
     @Override

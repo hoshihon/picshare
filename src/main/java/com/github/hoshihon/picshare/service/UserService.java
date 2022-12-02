@@ -6,8 +6,6 @@ import com.github.hoshihon.picshare.dto.UserProfile;
 import com.github.hoshihon.picshare.dto.UserProperties;
 import com.github.hoshihon.picshare.model.User;
 
-import java.util.List;
-
 public interface UserService {
 
 
@@ -16,13 +14,16 @@ public interface UserService {
     boolean login(UserProperties userProperties);
 
 
-
     UserProfile userProfile(long id);
 
+    int updateUser(UserProperties userProperties);
 
-    UserVO searchUser(int id);
+    UserProperties findById(long id);
 
-    UserVO deleteUser(int id);
+
+    UserProperties searchUser(int id);
+
+    int deleteUser(int id);
 
     UserVO likeList(int id);
 

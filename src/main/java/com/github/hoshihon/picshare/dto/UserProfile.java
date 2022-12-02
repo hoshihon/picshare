@@ -1,12 +1,9 @@
 package com.github.hoshihon.picshare.dto;
 
-import com.github.hoshihon.picshare.model.Art;
-import com.github.hoshihon.picshare.model.User;
-
 import java.util.Date;
 import java.util.List;
 
-public class UserProfile extends UserProperties{
+public class UserProfile extends UserProperties {
 
     protected List<ArtProperties> userArt;
 
