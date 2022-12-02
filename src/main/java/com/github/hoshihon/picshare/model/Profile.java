@@ -4,9 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 public class Profile extends User {
-
-
-
     protected List<Art> userArt;
 
     public Profile() {

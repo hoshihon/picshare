@@ -1,6 +1,10 @@
 server:
   port: 8080
 
+
+web:
+  upload-path: /home/yyy/code/picshare/image
+
 spring:
   datasource:
     profiles: local
