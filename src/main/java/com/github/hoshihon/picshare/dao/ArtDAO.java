@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface ArtDAO extends BaseDAO {
     List<ArtProperties> artQuery();
+
+    List<ArtProperties> searchArt(String title);
+
 }

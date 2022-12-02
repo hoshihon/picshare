@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.hoshihon.picshare.dao.mybatis.ArtMapper">
-    <resultMap id="_ArtQuery" type="com.github.hoshihon.picshare.model.Art">
+    <resultMap id="_ArtQuery" type="com.github.hoshihon.picshare.dto.ArtProperties">
         <id column="id" property="id"/>
         <result column="art_title" property="title"/>
         <result column="img_link" property="imgLink"/>
@@ -66,7 +66,7 @@
         picshare_art pa
     </select>
 
-    <select id="findById" resultMap="_ArtQuery">
+    <select id="searchArt" resultMap="_ArtQuery">
         SELECT
         pa. id                as id,
         pa. art_title         as art_title,
@@ -76,12 +76,12 @@
         pa. star_count        as star_count,
         pa. upload_date       as upload_date,
         pa. description       as description,
-        pa. user_id           as user_id,
+        pa. user_id           as user_id
 
         FROM
         picshare_art pa
         WHERE
-        `id` = #{id}
+        `art_title` = #{title}
 
     </select>
 
