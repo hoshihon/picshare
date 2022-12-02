@@ -12,9 +12,6 @@ public interface UserDAO extends BaseDAO {
 
     void register(User user);
 
-    List<UserProperties> findById(int id);
-
-    void update(UserProperties userProperties);
 
     User findUser(String username);
 
