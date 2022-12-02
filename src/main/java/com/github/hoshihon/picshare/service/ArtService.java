@@ -1,6 +1,5 @@
 package com.github.hoshihon.picshare.service;
 
-import com.github.hoshihon.picshare.VO.ArtVO;
 import com.github.hoshihon.picshare.dto.ArtProperties;
 import com.github.hoshihon.picshare.model.Art;
 
@@ -14,7 +13,7 @@ public interface ArtService {
 
     boolean deleteArt(long id);
 
-    ArtVO searchArt(int id);
+    List<ArtProperties> searchArt(String title);
 
 
 }
