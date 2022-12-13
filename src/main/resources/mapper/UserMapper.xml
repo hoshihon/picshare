@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.hoshihon.picshare.dao.mybatis.UserMapper">
-    <resultMap id="_UserQuery" type="com.github.hoshihon.picshare.dto.UserProperties">
+
+    <resultMap id="_UserQuery" type="com.github.hoshihon.picshare.model.User">
         <id column="id" property="id" />
         <result column="username" property="username"/>
         <result column="password" property="password"/>

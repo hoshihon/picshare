@@ -11,7 +11,8 @@ public interface UserService {
 
     boolean register(User user);
 
-    boolean login(UserProperties userProperties);
+    ResponseResult login(UserProperties userProperties);
+    ResponseResult loginOut();
 
 
     UserProfile userProfile(long id);

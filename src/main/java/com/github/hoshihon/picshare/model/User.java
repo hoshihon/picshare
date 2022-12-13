@@ -1,8 +1,11 @@
 package com.github.hoshihon.picshare.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = -40356785423868312L;
+
     private long id;
 
     private String username;
@@ -44,6 +47,8 @@ public class User {
 
     public long getId() {
         return id;
+
+
     }
 
     public void setId(long id) {
@@ -113,4 +118,5 @@ public class User {
     public void setLoginDate(Date loginDate) {
         this.loginDate = loginDate;
     }
+
 }

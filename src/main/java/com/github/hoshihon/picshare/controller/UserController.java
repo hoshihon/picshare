@@ -9,12 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.util.UUID;
 
 @RestController
@@ -28,8 +29,8 @@ public class UserController {
 
     public static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
-    @RequestMapping("/register")
-    public ApiResult register(User userForm) {
+    @PostMapping("/register")
+    public ApiResult register(@RequestBody User userForm) {
         if (userService.register(userForm)) {
             return ApiResult.success();
         } else {
@@ -37,18 +38,27 @@ public class UserController {
         }
     }
 
-    @GetMapping("/login")
-    public ApiResult login(UserProperties userForm) {
+    @PostMapping("/login")
+    public ApiResult loginSecurity(UserProperties userForm) {
 
-
-        if (userService.login(userForm)) {
-            return ApiResult.success();
-        } else {
-            return ApiResult.failed("login error");
-        }
+        return ApiResult.success(userService.login(userForm).getData());
     }
 
+//    @GetMapping("/login ")
+//    public ApiResult login(UserProperties userForm) {
+//
+//
+//        if (userService.login(userForm)) {
+//            return ApiResult.success();
+//        } else {
+//            return ApiResult.failed("login error");
+//        }
+//    }
+
+
+
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('user')")
     public ApiResult<UserProfile> userprofile(@PathVariable("id") long id) {
         UserProfile userProfile = userService.userProfile(id);
         return ApiResult.success(userProfile);
